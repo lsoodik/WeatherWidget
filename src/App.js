@@ -1,10 +1,12 @@
+import Card from "./components/Card/Card";
 import GetGeolocation from "./components/getGeolocation/getGeolocation";
-import Header from "./components/header/header";
+import Input from "./components/input/input";
 export default function App() {
   return (
-    <div className={"container"}>
-      <Header />
+    <div className={"container-fluid"}>
+      <Input />
       <GetGeolocation />
+      <Card/>
     </div>
   );
 }

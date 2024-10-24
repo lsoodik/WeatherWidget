@@ -1,6 +1,7 @@
 import { useState } from "react";
-export default function Header() {
+export default function Input() {
   const [location, setLocation] = useState("");
+  
   return (
     <div className={"container"}>
       <div className="input-group">

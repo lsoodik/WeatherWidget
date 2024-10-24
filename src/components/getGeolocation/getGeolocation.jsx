@@ -1,13 +1,7 @@
 import { useGeolocated } from "react-geolocated";
-import useFetch from "../useFetch/useFetch";
 import { useEffect, useState } from "react";
 
-export default function GetGeolocation() {
-  const [latitude, setLatitiude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
-  const [location, setLocation] = useState({});
-  const [temp, setTemp] = useState({})
-
+export default function GetLocation() {
   const { coords, isGeolocationAvailable, isGeolocationEnabled } =
     useGeolocated({
       positionOptions: {
@@ -15,7 +9,8 @@ export default function GetGeolocation() {
       },
       userDecisionTimeout: 5000,
     });
-
+  const [latitude, setLatitiude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
   useEffect(() => {
     if (coords) {
       setLatitiude(coords.latitude);
@@ -23,29 +18,6 @@ export default function GetGeolocation() {
     }
   }, [coords]);
 
-  const API_KEY = "647d26aeed2e5216c57fe2928f1fdf0c";
-  const url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`;
-  const data = useFetch(url);
   
-  useEffect(() => {
-    setTemp(Math.round(data.main.temp - 273));
-    setLocation(data.name);
-  }, [data]);
-
-  return !isGeolocationAvailable ? (
-    <div>У нас нет доступа к вашей геолокации</div>
-  ) : !isGeolocationEnabled ? (
-    <div>Геолокация отключена</div>
-  ) : coords ? (
-    <div className={"container"}>
-      <h3>
-        <span className="text-muted">Ваш город:</span> {location}
-      </h3>
-      <p>lat: {latitude}</p>
-      <p>long: {longitude}</p>
-      <p>temp: {temp}</p>
-    </div>
-  ) : (
-    <div>Получаем данные... </div>
-  );
+  return [latitude, longitude, isGeolocationAvailable, isGeolocationEnabled];
 }
