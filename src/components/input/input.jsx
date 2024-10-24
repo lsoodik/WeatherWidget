@@ -1,19 +1,21 @@
 import { useState } from "react";
+import style from "./input.module.css"
 export default function Input() {
   const [location, setLocation] = useState("");
   
   return (
-    <div className={"container"}>
+    <div className={style.inputwrapper + " " + "container"}>
+      <h3>Weather</h3>
       <div className="input-group">
         <input
           type="text"
-          className="form-control"
+          className={style.input + " " + "form-control"}
           placeholder="Your city"
           aria-label="Username"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
         />
-        <button type="button" className="btn btn-outline-secondary">
+        <button type="button" className={style.inputBtn + " " + "btn-outline-secondary"}>
           Поиск
         </button>
         
